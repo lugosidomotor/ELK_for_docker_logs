@@ -26,7 +26,7 @@ crontab -e
 0 1 * * * curator_cli --host localhost:9200 --dry-run delete_indices --filter_list '[{"filtertype": "pattern", "kind": "prefix", "value": "filebeat-"}, {"filtertype": "age", "source": "name", "direction": "older", "timestring": "%Y.%m.%d", "unit": "days","unit_count": 90}]'
 ```
 
-Using a Different Index for some Applications
+Using a Different Index for some Applications:
 ```sh
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
@@ -41,3 +41,5 @@ output.elasticsearch:
             container.image.name: docker.elastic.co/kibana/kibana:7.2.0
     - index: "filebeat-apps-%{[agent.version]}-%{+yyyy.MM.dd}"
 ```
+Sources:
+https://www.sarulabs.com/post/5/2019-08-12/sending-docker-logs-to-elasticsearch-and-kibana-with-filebeat.html
